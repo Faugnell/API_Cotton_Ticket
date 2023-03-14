@@ -30,7 +30,7 @@ class Apprenant
      * 
      * @param string $mail Mail utilisateur
      * @param string $password Mot de passe
-     * @return int Renvoie l'identifiatn de la personne so le mail et le mot de passe sont bon
+     * @return int Renvoie l'identifiant de la personne so le mail et le mot de passe sont bon
      */
     public function connexion($mail, $password)
     {

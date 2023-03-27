@@ -41,20 +41,16 @@ class TicketPedagogique
         $rq->execute([$this->_id_ticket_p]);
         if ($rq->fetchColumn() == 0) {
             // Ecriture de la requête SQL en y insérant le nom de la table
-            $sql = "INSERT INTO {$this->_table} SET id_ticket=:id_ticket, id_ticket_p=:id_ticket_p, date_ouverture=:date_ouverture, resolution=:resolution, clos=:clos, date_clos=:date_clos";
+            $sql = "INSERT INTO {$this->_table} SET fk_id_utilisateur=:id_utilisateur";
             // Préparation de la requête
             $rq = $this->_connexion->prepare($sql);
             // Ajout des données protégées
-            $rq->bindParam(":mail", $this->_id_ticket, PDO::PARAM_STR);
-            $rq->bindParam(":pass", $this->_id_ticket_p, PDO::PARAM_STR);
-            $rq->bindParam(":nom", $this->_date_ouverture, PDO::PARAM_STR);
-            $rq->bindParam(":prenom", $this->_resolution, PDO::PARAM_STR);
-            $rq->bindParam(":statut", $this->_clos, PDO::PARAM_STR);
-            $rq->bindParam(":admin", $this->_date_clos, PDO::PARAM_BOOL);
+            $rq->bindParam(":id_utilisateur", $this->_id_utilisateur, PDO::PARAM_STR);
             // Exécution de la requête
             if ($rq->execute()) {
                 return $this->_connexion->lastInsertId();
             }
+            // Ajouter Update pour remplir la table reponse pedagogique
         }
         return false;
     }

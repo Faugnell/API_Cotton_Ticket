@@ -1,6 +1,6 @@
 <?php
 
-class TicketTechnologique
+class TicketTechnique
 {
     // Connexion
     private $_connexion;

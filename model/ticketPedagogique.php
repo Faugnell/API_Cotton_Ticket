@@ -81,7 +81,7 @@ class TicketPedagogique
      * 
      * @param int $id_ticket_p id du ticket pédagogique
      */
-    public function lire_ticket($id_ticket_p)
+    public function lire_ticket_pedagogique($id_ticket_p)
     {
         // Récupération des infos BDD
         $rq = $this->_connexion->prepare('select id_ticket_p from ticket where id_ticket_p = ?');

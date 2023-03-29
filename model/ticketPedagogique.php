@@ -98,4 +98,13 @@ class TicketPedagogique
             return false;
         }
     }
+
+    /**
+     * Afficher la liste des tickets dépendant de si on à un utilisateur ou non
+     * 
+     * @param int $id_utilisateur
+     */
+    public function liste_ticket_pedagogique($id_utilisateur = "")
+    {
+    }
 }

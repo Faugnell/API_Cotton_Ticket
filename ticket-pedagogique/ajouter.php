@@ -53,13 +53,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         // Ici on a reçu les données
         // On hydrate notre objet
         $ticketPedagogique->_id_utilisateur = $donnees->id_utilisateur;
-        $id_ticket = $ticketPedagogique->ajouter_ticket_pedagogique();
-        print_r($id_ticket);
-        if ($id_ticket) {
+        $id_ticket_p = $ticketPedagogique->ajouter_ticket_pedagogique();
+        print_r($id_ticket_p);
+        if ($id_ticket_p) {
             // Ici la création a fonctionné
             // On envoie un code 201
             http_response_code(201);
-            echo json_encode(["message" => "Le ticket à bient été créer", "id_utilisateur" => $id_ticket], JSON_UNESCAPED_UNICODE);
+            echo json_encode(["message" => "Le ticket à bient été créer", "id_ticket_p" => $id_ticket_p], JSON_UNESCAPED_UNICODE);
         } else {
             // Ici la création n'a pas fonctionnée
             // On envoie un code 503

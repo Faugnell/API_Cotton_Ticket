@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
         $id_ticket_p = $ticketPedagogique->lire_ticket_pedagogique($donnees->id_ticket_p);
         if ($id_ticket_p)
         {
-            echo json_encode(array("id_ticket_p" => $id_ticket_p, "message" => "Le ticket existe"));
+            echo json_encode(array("id_ticket_p" => $id_ticket_p));
         }
     }
     else 

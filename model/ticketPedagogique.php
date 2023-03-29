@@ -91,7 +91,9 @@ class TicketPedagogique
         if ($rq->fetchColumn()) {
             $rq = $this->_connexion->prepare('select * from view_ticket_p where id_ticket_p = ?');
             $rq->execute([$id_ticket_p]);
-            return $rq->fetchColumn();
+            while ($donnees = $rq->fetchAll(PDO::FETCH_ASSOC)) {
+                return $donnees;
+            }
         } else {
             return false;
         }

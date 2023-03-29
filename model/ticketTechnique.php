@@ -54,19 +54,20 @@ class TicketTechnique
      * Tester l'id du ticket pédagogique pour le lire
      * 
      * @param int $id_ticket_p id du ticket pédagogique
-     * @return int Renvoie l'identifiant de la personne so le mail et le mot de passe sont bon
      */
-    public function lire_ticket_technique($id_ticket_p)
+    public function lire_ticket_technique($id_ticket_t)
     {
         // Récupération des infos BDD
-        $rq = $this->_connexion->prepare('select id_ticket_p from ticket where id_ticket_p = ?');
+        $rq = $this->_connexion->prepare('select id_ticket_t from ticket where id_ticket_t = ?');
 
         // Vérification de l'id ticket pédagogique qui renvoie true
-        $rq->execute([$id_ticket_p]);
+        $rq->execute([$id_ticket_t]);
         if ($rq->fetchColumn()) {
-            $rq = $this->_connexion->prepare('select * from view_ticket_p where id_ticket_p = ?');
-            $rq->execute([$id_ticket_p]);
-            return $rq->fetchColumn();
+            $rq = $this->_connexion->prepare('select * from view_ticket_t where id_ticket_t = ?');
+            $rq->execute([$id_ticket_t]);
+            while ($donnees = $rq->fetchAll(PDO::FETCH_ASSOC)) {
+                return $donnees;
+            }
         } else {
             return false;
         }

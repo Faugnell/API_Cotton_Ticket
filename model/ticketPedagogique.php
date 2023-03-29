@@ -50,7 +50,7 @@ class TicketPedagogique
             if ($rq->execute()) {
                 return $this->_connexion->lastInsertId();
             }
-            $sql = "INSERT INTO reponse pedagogique set fk_id_ticket=:id_ticket, fk_id_question_p=:id_question_p, reponse=:reponse";
+            $sql = "INSERT INTO reponse_pedagogique set fk_id_ticket=:id_ticket, fk_id_question_p=:id_question_p, reponse=:reponse";
             $rq = $this->_connexion->prepare($sql);
             $rq->bindParam(":id_ticket", $this->_id_ticket, PDO::PARAM_STR);
             $rq->bindParam(":id_question_p", $this->_id_question_p, PDO::PARAM_STR);

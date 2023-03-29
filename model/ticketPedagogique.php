@@ -16,7 +16,13 @@ class TicketPedagogique
     public $_id_utilisateur;
     public $_id_question_p;
     public $_nom_question;
-    public $_reponse;
+    public $_rep1 = "";
+    public $_rep2 = "";
+    public $_rep3 = "";
+    public $_rep4 = "";
+    public $_rep5 = "";
+    public $_rep6 = "";
+    public $_rep7 = "";
 
     /**
      * Constructeur avec $db pour la connexion à la base de données
@@ -36,28 +42,36 @@ class TicketPedagogique
 
     public function ajouter_ticket_pedagogique()
     {
-        // On vérifie que le ticket n'est pas déjà existant dans la BDD avec l'id_ticket
-        $rq = $this->_connexion->prepare('SELECT COUNT(*) FROM ticket_pedagogique WHERE id_ticket_p = ?');
-        $rq->execute([$this->_id_ticket_p]);
-        if ($rq->fetchColumn() == 0) {
-            // Ecriture de la requête SQL en y insérant le nom de la table
-            $sql = "INSERT INTO {$this->_table} SET fk_id_utilisateur=:id_utilisateur";
-            // Préparation de la requête
-            $rq = $this->_connexion->prepare($sql);
-            // Ajout des données protégées
-            $rq->bindParam(":id_utilisateur", $this->_id_utilisateur, PDO::PARAM_STR);
-            // Exécution de la requête
-            if ($rq->execute()) {
-                return $this->_connexion->lastInsertId();
-            }
-            $sql = "INSERT INTO reponse_pedagogique set fk_id_ticket=:id_ticket, fk_id_question_p=:id_question_p, reponse=:reponse";
-            $rq = $this->_connexion->prepare($sql);
-            $rq->bindParam(":id_ticket", $this->_id_ticket, PDO::PARAM_STR);
-            $rq->bindParam(":id_question_p", $this->_id_question_p, PDO::PARAM_STR);
-            $rq->bindParam(":reponse", $this->_reponse, PDO::PARAM_STR);
-            if ($rq->execute()) {
-                return $this->_connexion->lastInsertId();
-            }
+        // Ecriture de la requête SQL en y insérant le nom de la table
+        $sql = "INSERT INTO {$this->_table} SET fk_id_utilisateur=:id_utilisateur";
+        // Préparation de la requête
+        $rq = $this->_connexion->prepare($sql);
+        // Ajout des données protégées
+        $rq->bindParam(":id_utilisateur", $this->_id_utilisateur, PDO::PARAM_INT);
+        // Exécution de la requête
+        if ($rq->execute()) {
+            $this->_id_ticket_p = $this->_connexion->lastInsertId();
+        }
+        $sql = "INSERT INTO reponse_pedagogique
+        (fk_id_ticket_p, fk_id_question_p, reponse) values
+        (:id_ticket_p, 1, :rep1),
+        (:id_ticket_p, 2, :rep2),
+        (:id_ticket_p, 3, :rep3),
+        (:id_ticket_p, 4, :rep4),
+        (:id_ticket_p, 5, :rep5),
+        (:id_ticket_p, 6, :rep6),
+        (:id_ticket_p, 7, :rep7)";
+        $rq = $this->_connexion->prepare($sql);
+        $rq->bindParam(":id_ticket_p", $this->_id_ticket_p, PDO::PARAM_INT);
+        $rq->bindParam(":rep1", $this->_rep1, PDO::PARAM_STR);
+        $rq->bindParam(":rep2", $this->_rep2, PDO::PARAM_STR);
+        $rq->bindParam(":rep3", $this->_rep3, PDO::PARAM_STR);
+        $rq->bindParam(":rep4", $this->_rep4, PDO::PARAM_STR);
+        $rq->bindParam(":rep5", $this->_rep5, PDO::PARAM_STR);
+        $rq->bindParam(":rep6", $this->_rep6, PDO::PARAM_STR);
+        $rq->bindParam(":rep7", $this->_rep7, PDO::PARAM_STR);
+        if ($rq->execute()) {
+            return $this->_id_ticket_p;
         }
         return false;
     }

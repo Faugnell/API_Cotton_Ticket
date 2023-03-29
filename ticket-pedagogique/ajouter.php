@@ -28,16 +28,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
     // On récupère les données
     $donnees = json_decode(file_get_contents("php://input"));
     if (!empty($donnees->id_utilisateur)) {
+        // Vérification que les données ne sont pas vide avant de les remplir
+        if(!empty($donnees->rep1)){
+            $ticketPedagogique->_rep1 = $donnees->rep1;
+        }
+        if(!empty($donnees->rep2)){
+            $ticketPedagogique->_rep2 = $donnees->rep2;
+        }
+        if(!empty($donnees->rep3)){
+            $ticketPedagogique->_rep3 = $donnees->rep3;
+        }
+        if(!empty($donnees->rep4)){
+            $ticketPedagogique->_rep4 = $donnees->rep4;
+        }
+        if(!empty($donnees->rep5)){
+            $ticketPedagogique->_rep5 = $donnees->rep5;
+        }
+        if(!empty($donnees->rep6)){
+            $ticketPedagogique->_rep6 = $donnees->rep6;
+        }
+        if(!empty($donnees->rep7)){
+            $ticketPedagogique->_rep7 = $donnees->rep7;
+        }
         // Ici on a reçu les données
         // On hydrate notre objet
         $ticketPedagogique->_id_utilisateur = $donnees->id_utilisateur;
-        $id = $ticketPedagogique->ajouter_ticket_pedagogique();
-        print_r($id);
-        if ($id) {
+        $id_ticket = $ticketPedagogique->ajouter_ticket_pedagogique();
+        print_r($id_ticket);
+        if ($id_ticket) {
             // Ici la création a fonctionné
             // On envoie un code 201
             http_response_code(201);
-            echo json_encode(["message" => "Le ticket à bient été créer", "id_utilisateur" => $id], JSON_UNESCAPED_UNICODE);
+            echo json_encode(["message" => "Le ticket à bient été créer", "id_utilisateur" => $id_ticket], JSON_UNESCAPED_UNICODE);
         } else {
             // Ici la création n'a pas fonctionnée
             // On envoie un code 503

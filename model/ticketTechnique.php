@@ -9,10 +9,13 @@ class TicketTechnique
     // variables publiques
     public $_id_ticket;
     public $_id_ticket_t;
+    public $_id_type;
+    public $_commentaire;
     public $_date_ouverture;
     public $_resolution;
     public $_clos;
     public $_date_clos;
+    public $_id_utilisateur;
 
     /**
      * Constructeur avec $db pour la connexion à la base de données
@@ -32,25 +35,17 @@ class TicketTechnique
 
     public function ajouter_ticket_technique()
     {
-        // On vérifie que le ticket n'est pas déjà existant dans la BDD avec l'id_ticket
-        $rq = $this->_connexion->prepare('SELECT COUNT(*) FROM ticket WHERE id_ticket = ?');
-        $rq->execute([$this->_id_ticket]);
-        if ($rq->fetchColumn() == 0) {
-            // Ecriture de la requête SQL en y insérant le nom de la table
-            $sql = "INSERT INTO {$this->_table} SET id_ticket=:id_ticket, id_ticket_t=:id_ticket_t, date_ouverture=:date_ouverture, resolution=:resolution, clos=:clos, date_clos=:date_clos";
-            // Préparation de la requête
-            $rq = $this->_connexion->prepare($sql);
-            // Ajout des données protégées
-            $rq->bindParam(":mail", $this->_id_ticket, PDO::PARAM_STR);
-            $rq->bindParam(":pass", $this->_id_ticket_t, PDO::PARAM_STR);
-            $rq->bindParam(":nom", $this->_date_ouverture, PDO::PARAM_STR);
-            $rq->bindParam(":prenom", $this->_resolution, PDO::PARAM_STR);
-            $rq->bindParam(":statut", $this->_clos, PDO::PARAM_STR);
-            $rq->bindParam(":admin", $this->_date_clos, PDO::PARAM_BOOL);
-            // Exécution de la requête
-            if ($rq->execute()) {
-                return $this->_connexion->lastInsertId();
-            }
+        // Ecriture de la requête SQL en y insérant le nom de la table
+        $sql = "INSERT INTO {$this->_table} SET id_utilisateur=:id_utilisateur, id_type_t=:id_type, commentaire=:commentaire";
+        // Préparation de la requête
+        $rq = $this->_connexion->prepare($sql);
+        // Ajout des données protégées
+        $rq->bindParam(":id_utilisateur", $this->_id_utilisateur, PDO::PARAM_INT);
+        $rq->bindParam(":id_type", $this->_id_type, PDO::PARAM_INT);
+        $rq->bindParam(":commentaire", $this->_commentaire, PDO::PARAM_STR);
+        // Exécution de la requête
+        if ($rq->execute()) {
+            return $this->_connexion->lastInsertId();;
         }
         return false;
     }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Ticket
 {
@@ -32,17 +32,11 @@ class Ticket
      */
     public function lire_ticket($id_utilisateur)
     {
-        // Récupération des infos BDD
-        $rq = $this->_connexion->prepare('select * from ticket where id_utilisateur = ?');
-
-        // Vérification de l'id ticket pédagogique qui renvoie true
+        $sql = "select * from view_ticket where id_utilisateur = {$id_utilisateur}";
+        $rq = $this->_connexion->prepare($sql);
         $rq->execute([$id_utilisateur]);
-        if ($rq->fetchColumn()) {
-            $rq = $this->_connexion->prepare('select * from view_ticket_p where id_utilisateur = ?');
-            $rq->execute([$id_utilisateur]);
-            return $rq->fetchColumn();
-        } else {
-            return false;
+        while ($donnees = $rq->fetchAll(PDO::FETCH_ASSOC)) {
+            return $donnees;
         }
     }
 }

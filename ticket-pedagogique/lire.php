@@ -42,6 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
     {
         // 404 Not Found
         http_response_code(404);
-        echo json_encode(array("message" => "Il n'y a pas de mail"));
+        echo json_encode(array("message" => "Il n'y a pas de ticket"));
     }
 }

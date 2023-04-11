@@ -106,5 +106,14 @@ class TicketPedagogique
      */
     public function liste_ticket_pedagogique($id_utilisateur = "")
     {
+        $sql = "select * from view_ticket_p";
+        if ($id_utilisateur != "") {
+            $sql .= " where id_utilisateur = {$id_utilisateur}";
+        }
+        $rq = $this->_connexion->prepare($sql);
+        $rq->execute([$id_utilisateur]);
+        while ($donnees = $rq->fetchAll(PDO::FETCH_ASSOC)) {
+            return $donnees;
+        }
     }
 }

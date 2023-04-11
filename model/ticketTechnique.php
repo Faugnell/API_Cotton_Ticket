@@ -72,4 +72,22 @@ class TicketTechnique
             return false;
         }
     }
+
+    /**
+     * Afficher la liste des tickets dépendant de si on à un utilisateur ou non
+     * 
+     * @param int $id_utilisateur
+     */
+    public function liste_ticket_technique($id_utilisateur = "")
+    {
+        $sql = "select * from view_ticket_t";
+        if ($id_utilisateur != "") {
+            $sql .= " where id_utilisateur = {$id_utilisateur}";
+        }
+        $rq = $this->_connexion->prepare($sql);
+        $rq->execute([$id_utilisateur]);
+        while ($donnees = $rq->fetchAll(PDO::FETCH_ASSOC)) {
+            return $donnees;
+        }
+    }
 }

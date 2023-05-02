@@ -8,7 +8,10 @@ class Bdd {
   // La connexion au bd est établie dans le constructeur privé.
   private function __construct()
   {
-    $this->conn = new PDO('mysql:host=localhost;dbname=cotton_ticket', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    // Connexion en ligne
+    $this->conn = new PDO('mysql:host=localhost;dbname=cotton_ticket', 'vipa0880_vpetit', 'JW6owufSU+MX', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    // Connexion local
+    //$this->conn = new PDO('mysql:host=localhost;dbname=cotton_ticket', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
   }
   
   public static function getInstance()

@@ -10,10 +10,10 @@ class Ticket
     public $_id_ticket;
     public $_id_ticket_p;
     public $_id_ticket_t;
-    public $date_ouverture;
-    public $resolution;
-    public $clos;
-    public $date_clos;
+    public $_date_ouverture;
+    public $_resolution;
+    public $_clos;
+    public $_date_clos;
 
     /**
      * Constructeur avec $db pour la connexion à la base de données

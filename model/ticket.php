@@ -32,9 +32,9 @@ class Ticket
      */
     public function lire_ticket($id_utilisateur)
     {
-        $sql = "select * from view_ticket where id_utilisateur = {$id_utilisateur}";
-        $rq = $this->_connexion->prepare($sql);
+        $rq = $this->_connexion->prepare("select * from view_ticket where id_utilisateur = ?");
         $rq->execute([$id_utilisateur]);
+        $rq->bindValue( ":id_utilisateur", $id_utilisateur, PDO::PARAM_STR );
         while ($donnees = $rq->fetchAll(PDO::FETCH_ASSOC)) {
             return $donnees;
         }

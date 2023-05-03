@@ -27,12 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
     $ticket = new Ticket($db);
 
     // On récupère les données
-    $donnees = json_decode((file_get_contents("php://input")));
+    //$donnees = json_decode((file_get_contents("php://input")));
 
     // On vérifie qu'on à bien un id utilisateur
-    if (!empty($donnees->id_utilisateur))
+    if (!empty($_GET['id_utilisateur']))
     {
-        $id_utilisateur = $ticket->lire_ticket($donnees->id_utilisateur);
+        $id_utilisateur = $ticket->lire_ticket($_GET['id_utilisateur']);
         if ($id_utilisateur)
         {
             echo json_encode(array("id_utilisateur" => $id_utilisateur));

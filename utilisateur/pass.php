@@ -27,12 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
     $utilisateur = new Utilisateur($db);
 
     // On récupère les données
-    $donnees = json_decode((file_get_contents("php://input")));
+    //$donnees = json_decode((file_get_contents("php://input")));
 
     // On vérifie qu'on à bien un mail
-    if (!empty($donnees->mail))
+    if (!empty($_GET['mail']))
     {
-        $pass = $utilisateur->verification_pass($donnees->mail, $donnees->password);
+        $pass = $utilisateur->verification_pass($_GET['mail'], $_GET['password']);
         if ($pass)
         {
             echo json_encode(array("pass" => $pass, "message" => "Le mot de passe est correct"));

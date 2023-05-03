@@ -30,9 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
     $donnees = json_decode((file_get_contents("php://input")));
 
     // On vérifie qu'on à bien un mail
-    if (!empty($donnees->mail))
+    if (!empty($_GET['mail']))
     {
-        $existe = $utilisateur->existe_utilisateur($donnees->mail);
+        $existe = $utilisateur->existe_utilisateur($_GET['mail']);
         if ($existe)
         {
             echo json_encode(array("existe" => $existe, "message" => "L'utilisateur existe'"));

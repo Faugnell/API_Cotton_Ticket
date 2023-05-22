@@ -32,10 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
     // On vérifie qu'on à bien un id utilisateur
     if (!empty($_GET['id_utilisateur']))
     {
-        $id_utilisateur = $ticket->lire_ticket($_GET['id_utilisateur']);
-        if ($id_utilisateur)
+        $tickets = $ticket->lire_ticket($_GET['id_utilisateur']);
+        if ($tickets)
         {
-            echo json_encode(array("id_utilisateur" => $id_utilisateur));
+            echo json_encode($tickets);
         }
     }
     else 

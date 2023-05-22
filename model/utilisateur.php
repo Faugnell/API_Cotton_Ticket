@@ -31,14 +31,17 @@ class Utilisateur
      * 
      * 
      */
-    public function existe_utilisateur($mail)
+    public function connexion_utilisateur($mail, $password)
     {
-        $rq = $this->_connexion->prepare('select * from utilisateur where mail = ?');
+        // Récupération des infos BDD
+        $rq = $this->_connexion->prepare('select pass from utilisateur where mail = ?');
 
-        // Vérification de l'id ticket pédagogique qui renvoie true
+        // Vérification de l'email et du mdp qui renvoie true
         $rq->execute([$mail]);
-        if ($rq->fetchColumn()) {
-            return true;
+        if (password_verify($password, $rq->fetchColumn())) {
+            $rq = $this->_connexion->prepare('select id_utilisateur from utilisateur where mail = ?');
+            $rq->execute([$mail]);
+            return $rq->fetchColumn();
         } else {
             return false;
         }

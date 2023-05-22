@@ -24,24 +24,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
     $db = Bdd::getInstance()->getConnection();
 
     // On instancie le formateur
-    $utilisateur = new Utilisateur($db);
+    $id_utilisateur = new Utilisateur($db);
 
     // On récupère les données
     $donnees = json_decode((file_get_contents("php://input")));
 
     // On vérifie qu'on à bien un mail
-    if (!empty($_GET['mail']))
+    if (!empty($donnees->mail))
     {
-        $existe = $utilisateur->existe_utilisateur($_GET['mail']);
-        if ($existe)
+        $id_utilisateur = $formateur->connexion_utilisateur($donnees->mail, $donnees->password);
+        if ($id_utilisateur)
         {
-            echo json_encode(array("existe" => $existe, "message" => "L'utilisateur existe'"));
+            echo json_encode(array("id_utilisateur" => $id_utilisateur, "message" => "L'utilisateur existe"));
         }
     }
     else 
     {
         // 404 Not Found
         http_response_code(404);
-        echo json_encode(array("message" => "Il n'y a pas d'utilisateur"));
+        echo json_encode(array("message" => "Il n'y a pas de mail"));
     }
 }

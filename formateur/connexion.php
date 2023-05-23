@@ -27,12 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
     $formateur = new Formateur($db);
 
     // On récupère les données
-    $donnees = json_decode((file_get_contents("php://input")));
+    //$donnees = json_decode((file_get_contents("php://input")));
 
     // On vérifie qu'on à bien un mail
-    if (!empty($donnees->mail))
+    if (!empty($_GET['mail']))
     {
-        $id_utilisateur = $formateur->connexion($donnees->mail, $donnees->password);
+        $id_utilisateur = $formateur->connexion($_GET['mail'], $_GET['password']);
         if ($id_utilisateur)
         {
             echo json_encode(array("id_utilisateur" => $id_utilisateur, "message" => "L'utilisateur existe"));

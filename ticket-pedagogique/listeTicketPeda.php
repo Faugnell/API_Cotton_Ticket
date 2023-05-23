@@ -27,15 +27,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
     $ticketPedagogique = new TicketPedagogique($db);
 
     // On récupère les données
-    $donnees = json_decode((file_get_contents("php://input")));
+    //$donnees = json_decode((file_get_contents("php://input")));
 
     // On vérifie qu'on à bien un id utilisateur
-    if (!empty($donnees->id_utilisateur))
+    if (!empty($_GET['id_utilisateur']))
     {
-        $id_utilisateur = $ticketPedagogique->liste_ticket_pedagogique($donnees->id_utilisateur);
-        if ($id_utilisateur)
+        $tickets_p = $ticketPedagogique->liste_ticket_pedagogique($_GET['id_utilisateur']);
+        if ($tickets_p)
         {
-            echo json_encode(array("id_utilisateur" => $id_utilisateur));
+            echo json_encode($tickets_p);
         }
     }
     else 

@@ -39,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
             $apprenant->_admin = 1;
         }
         $id = $apprenant->ajouter_apprenant();
-        print_r($id);
         if ($id) {
             // Ici la création a fonctionné
             // On envoie un code 201

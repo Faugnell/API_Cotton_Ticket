@@ -111,7 +111,7 @@ class TicketPedagogique
             $sql .= " where id_utilisateur = {$id_utilisateur}";
         }
         $rq = $this->_connexion->prepare($sql);
-        $rq->execute([$id_utilisateur]);
+        $rq->execute();
         while ($donnees = $rq->fetchAll(PDO::FETCH_ASSOC)) {
             return $donnees;
         }

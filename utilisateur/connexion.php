@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
     $db = Bdd::getInstance()->getConnection();
 
     // On instancie le formateur
-    $id_utilisateur = new Utilisateur($db);
+    $utilisateur = new Utilisateur($db);
 
     // On récupère les données
     //$donnees = json_decode((file_get_contents("php://input")));

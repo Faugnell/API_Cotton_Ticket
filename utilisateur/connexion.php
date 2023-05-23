@@ -24,13 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
     $db = Bdd::getInstance()->getConnection();
 
     // On instancie le formateur
-    $utilisateur = new Utilisateur($db);
+    $id_utilisateur = new Utilisateur($db);
 
     // On récupère les données
     //$donnees = json_decode((file_get_contents("php://input")));
 
     // On vérifie qu'on à bien un mail
-    if (!empty($_GET['mail']))
+    if (!empty($donnees->mail))
     {
         $id_utilisateur = $utilisateur->connexion_utilisateur($_GET['mail'], $_GET['password']);
         if ($id_utilisateur)

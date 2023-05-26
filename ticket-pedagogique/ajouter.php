@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         // On hydrate notre objet
         $ticketPedagogique->_id_utilisateur = $_PUT['id_utilisateur'];
         $id_ticket_p = $ticketPedagogique->ajouter_ticket_pedagogique();
-        print_r($id_ticket_p);
+        var_dump($id_ticket_p);
         if ($id_ticket_p) {
             // Ici la création a fonctionné
             // On envoie un code 201

@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
 
     // On récupère les données
     //$donnees = json_decode(file_get_contents("php://input"));
-    if (!empty($_PUT['id_utilisateur'])) {
+    if (!empty($_GET['id_utilisateur'])) {
         // Vérification que les données ne sont pas vide avant de les remplir
         if(!empty($_PUT['rep1'])){
             $ticketPedagogique->_rep1 = $_PUT['rep1'];

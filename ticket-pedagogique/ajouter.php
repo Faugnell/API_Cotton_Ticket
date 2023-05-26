@@ -26,35 +26,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
     $ticketPedagogique = new TicketPedagogique($db);
 
     // On récupère les données
-    //$donnees = json_decode(file_get_contents("php://input"));
-    if (!empty($_GET['id_utilisateur'])) {
+    $donnees = json_decode(file_get_contents("php://input"));
+    if (!empty($donnees->id_utilisateur)) {
         // Vérification que les données ne sont pas vide avant de les remplir
-        if(!empty($_PUT['rep1'])){
-            $ticketPedagogique->_rep1 = $_PUT['rep1'];
+        if(!empty($donnees->rep1)){
+            $ticketPedagogique->_rep1 = $donnees->rep1;
         }
-        if(!empty($$_PUT['rep2'])){
-            $ticketPedagogique->_rep2 = $_PUT['rep2'];
+        if(!empty($donnees->rep2)){
+            $ticketPedagogique->_rep2 = $donnees->rep2;
         }
-        if(!empty($$_PUT['rep3'])){
-            $ticketPedagogique->_rep3 = $_PUT['rep3'];
+        if(!empty($donnees->rep3)){
+            $ticketPedagogique->_rep3 = $donnees->rep3;
         }
-        if(!empty($$_PUT['rep4'])){
-            $ticketPedagogique->_rep4 = $_PUT['rep4'];
+        if(!empty($donnees->rep4)){
+            $ticketPedagogique->_rep4 = $donnees->rep4;
         }
-        if(!empty($$_PUT['rep5'])){
-            $ticketPedagogique->_rep5 = $_PUT['rep5'];
+        if(!empty($donnees->rep5)){
+            $ticketPedagogique->_rep5 = $donnees->rep5;
         }
-        if(!empty($$_PUT['rep6'])){
-            $ticketPedagogique->_rep6 = $_PUT['rep6'];
+        if(!empty($donnees->rep6)){
+            $ticketPedagogique->_rep6 = $donnees->rep6;
         }
-        if(!empty($$_PUT['rep7'])){
-            $ticketPedagogique->_rep7 = $_PUT['rep7'];
+        if(!empty($donnees->rep7)){
+            $ticketPedagogique->_rep7 = $donnees->rep7;
         }
         // Ici on a reçu les données
         // On hydrate notre objet
-        $ticketPedagogique->_id_utilisateur = $_PUT['id_utilisateur'];
+        $ticketPedagogique->_id_utilisateur = $donnees->id_utilisateur;
         $id_ticket_p = $ticketPedagogique->ajouter_ticket_pedagogique();
-        var_dump($id_ticket_p);
         if ($id_ticket_p) {
             // Ici la création a fonctionné
             // On envoie un code 201

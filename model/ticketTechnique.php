@@ -45,7 +45,7 @@ class TicketTechnique
         $rq->bindParam(":commentaire", $this->_commentaire, PDO::PARAM_STR);
         // Exécution de la requête
         if ($rq->execute()) {
-            return $this->_id_ticket_t;
+            return $this->_connexion->lastInsertId();;
         }
         return false;
     }

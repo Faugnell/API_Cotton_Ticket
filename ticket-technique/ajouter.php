@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         $ticketTechnique->_id_type = $donnees->id_type;
         $ticketTechnique->_commentaire = $donnees->commentaire;
         $id_ticket_t = $ticketTechnique->ajouter_ticket_technique();
-        print_r($id_ticket_t);
         if ($id_ticket_t) {
             // Ici la création a fonctionné
             // On envoie un code 201
